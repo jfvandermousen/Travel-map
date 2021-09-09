@@ -25,7 +25,7 @@ function App() {
       >
       
       
-      <Marker latitude={49.67246935345207} longitude={-1.9400402058871986} offsetLeft={-20} offsetTop={-10}>
+      <Marker latitude={49.67246935345207} longitude={-1.9400402058871986} offsetLeft={-20} offsetTop={-30}>
         <RoomIcon color="primary" style={{fontSize:viewport.zoom * 3}} />
       </Marker>
       <Popup
