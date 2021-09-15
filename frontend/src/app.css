@@ -9,7 +9,7 @@
 
 label {
     width: max-content;
-    color: tomato;
+    color: rgb(255, 77, 45);
     font-size: 13px;
     border-bottom: .5px solid tomato;
     margin: 3px 0;
@@ -19,6 +19,11 @@ label {
 }
 .star {
     color: gold;
+}
+stars {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3px;
 }
 .username {
     font-size: 14px;
@@ -52,4 +57,40 @@ textarea {
     color: white;
     background-color: tomato;
     cursor: pointer;
+}
+
+input:focus-visible {
+    outline-color: tomato;
+}
+.mapboxgl-popup-content {
+    
+    box-shadow: -5px 5px 8px #4141414a !important;
+
+}
+.button {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.logout {
+    background-color: tomato;
+    position: absolute;
+    top:0;
+    right: 0;
+}
+.login {
+    background-color: sandybrown;
+}
+.register {
+    background-color: steelblue;
+}
+
+button.button {
+    margin: 5px;
+}
+.buttons {
+    display: flex;
+    justify-content: flex-end;
 }
