@@ -69,7 +69,7 @@ input:focus-visible {
 }
 .button {
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 5px;
     color: white;
 }
@@ -82,9 +82,12 @@ input:focus-visible {
 }
 .login {
     background-color: sandybrown;
+    font-weight: 600;
+    padding: 0.5em 1em;
 }
 .register {
     background-color: steelblue;
+    font-weight: 600;
 }
 
 button.button {
@@ -93,4 +96,5 @@ button.button {
 .buttons {
     display: flex;
     justify-content: flex-end;
+    margin: 2%;
 }

@@ -5,16 +5,21 @@ import StarIcon from '@material-ui/icons/Star';
 import "./app.css";
 import axios from "axios";
 import {format} from "timeago.js";
+import Register from './components/Register';
+import Login from './components/Login';
 
 
-function App() {
-  const currentUser = "Mario"
+function App () {
+  const myStorage = window.localStorage;
+  const [currentUsername, setCurrentUsername] = useState(myStorage.getItem("user"));
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle]  = useState(null);
   const [desc, setDesc] = useState(null);
   const [rating, setRating] = useState(0);
+  const [showRegister,setShowRegister] = useState(false);
+  const [showLogin,setShowLogin] = useState(false);
 
 
   const [viewport, setViewport] = useState({
@@ -53,7 +58,7 @@ useEffect(() => {
   const handleSubmit = async (e)=> {
     e.preventDefault(); 
     const newPin = {
-      username:currentUser,
+      username: currentUsername,
       title,
       desc,
       rating,
@@ -71,28 +76,31 @@ useEffect(() => {
     }
   };
 
-  // const [showPopup, togglePopup] = React.useState(false);
+  const handleLogout = () => {
+    setCurrentUsername(null);
+    myStorage.removeItem("user");
+  };
   
 
   return (
     <div className="App">
+      
       <ReactMapGL 
       {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
       onViewportChange={nextViewport => setViewport(nextViewport)}
       mapStyle="mapbox://styles/jfv-becode/cktbllj897z6x17phsb6648xj"
-      onDblClick = {handleAddClick}
+      onDblClick={currentUsername && handleAddClick}
       transitionDuration ="200"
       >
       
-      {pins.map(p=>(
-        <>
-      
+      {pins.map((p)=> (
+        < >
       <Marker latitude={p.lat} longitude={p.long} offsetLeft={-viewport.zoom * 2.5} offsetTop={-viewport.zoom * 5}>
         <RoomIcon 
         style={{
           fontSize:viewport.zoom * 5,
-          color: p.username===currentUser ? "purple" : "tomato",
+          color: currentUsername === p.username ? "tomato" : "slateblue",
           cursor:"pointer"}}
           onClick={()=>handleMarkerClick(p._id,p.lat,p.long)}
            />
@@ -156,12 +164,28 @@ useEffect(() => {
             </div>
         </Popup>
         }
-        {currentUser ? (<button className="button logout">Log out</button>) : (        <div className="buttons">
-        <button className="button login">Login</button>
-        <button className="button register">Register</button>
+        {currentUsername ?  (<button className="button logout" onClick={handleLogout}>Log out</button>) : (        <div className="buttons">
+        <button className="button login" 
+        onClick={()=>setShowLogin(true)}>
+          Login</button>
+
+        <button className="button register" 
+        onClick={()=>setShowRegister(true)}>Register</button>
         </div>)}
         
+        {showRegister && (
+            <Register setShowRegister={setShowRegister}/>
 
+        )}
+        {showLogin && (
+            <Login 
+            setShowLogin={setShowLogin}
+            setCurrentUsername={setCurrentUsername}
+            myStorage={myStorage}
+            />
+
+        )}
+        
       </ReactMapGL>
     </div>
   );
