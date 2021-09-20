@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react'
 import './login.css'
 import { Room, Cancel } from '@material-ui/icons';
-import axios from "axios";
+import {axiosInstance} from "../config";
 
 export default function Login({setShowLogin,setCurrentUsername, myStorage}) {
 
@@ -17,7 +17,7 @@ export default function Login({setShowLogin,setCurrentUsername, myStorage}) {
         };
 
         try {
-            const res = await axios.post("/users/login",user);
+            const res = await axiosInstance.post("/users/login",user);
             setCurrentUsername(res.data.username);
             myStorage.setItem("user",res.data.username);
             setShowLogin(false)
@@ -44,7 +44,7 @@ export default function Login({setShowLogin,setCurrentUsername, myStorage}) {
             
             <form onSubmit={handlesubmit}>
                 <input type="text" placeholder="username" ref={nameRef}/>
-                <input type="password" placeholder="password" ref={passwordRef}/>
+                <input type="password" placeholder="password" ref={passwordRef} autocomplete="current-password "/>
                 <button className="loginBtn">Login</button>
 
                 {error && (

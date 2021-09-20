@@ -4,6 +4,7 @@ const dotenv = require ('dotenv');
 const app = express();
 const pinRoute = require("./routes/pins");
 const userRoute = require("./routes/users");
+const path = require('path');
 
 dotenv.config();
 
@@ -15,9 +16,18 @@ mongoose.connect(process.env.MONGO_URL)
 })
 .catch(err=>console.log(err));
 
+
+
+
 app.use("/api/users",userRoute);
 app.use("/api/pins",pinRoute);
+app.use(express.static(path.join(__dirname, "/frontend/build")));
 
-app.listen(8800,()=>{
-    console.log("Backend server running agaiiiiiin!")
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/frontend/build', 'index.html'));
+});
+
+
+app.listen(process.env.PORT || 5000,() => {
+    console.log("Backend server running agaiiiiiin!");
+});

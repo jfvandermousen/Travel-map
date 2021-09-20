@@ -6,7 +6,9 @@
     justify-content: space-around;
     border-radius: 20px;
 }
-
+.mapboxgl-ctrl-bottom-right {
+    display: none !important;
+}
 label {
     width: max-content;
     color: rgb(255, 77, 45);

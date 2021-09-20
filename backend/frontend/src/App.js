@@ -1,12 +1,15 @@
 import React,{ useState, useEffect } from 'react';
 import ReactMapGL, {Marker, Popup} from 'react-map-gl';
+import mapboxgl from "mapbox-gl"
 import RoomIcon from '@material-ui/icons/Room';
 import StarIcon from '@material-ui/icons/Star';
 import "./app.css";
-import axios from "axios";
+import {axiosInstance} from "./config";
 import {format} from "timeago.js";
 import Register from './components/Register';
 import Login from './components/Login';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 
 function App () {
@@ -34,7 +37,7 @@ function App () {
 useEffect(() => {
     const getPins = async ()=>{
       try {
-        const res = await axios.get("/pins");
+        const res = await axiosInstance.get("/pins");
         setPins(res.data);
       } catch (error) {
         console.log(error);
@@ -67,7 +70,7 @@ useEffect(() => {
     }
 
     try {
-      const res = await axios.post("/pins",newPin);
+      const res = await axiosInstance.post("/pins",newPin);
       setPins([...pins,res.data]);
       setNewPlace(null);
 
