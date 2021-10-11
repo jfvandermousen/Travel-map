@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 5px;
     border-radius: 20px;
 }
 .mapboxgl-ctrl-bottom-right {
@@ -12,7 +13,7 @@
 label {
     width: max-content;
     color: rgb(255, 77, 45);
-    font-size: 13px;
+    font-size: 15px;
     border-bottom: .5px solid tomato;
     margin: 3px 0;
 }
