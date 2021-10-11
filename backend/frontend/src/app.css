@@ -7,9 +7,7 @@
     padding: 5px;
     border-radius: 20px;
 }
-.mapboxgl-ctrl-bottom-right {
-    display: none !important;
-}
+
 label {
     width: max-content;
     color: rgb(255, 77, 45);
@@ -23,7 +21,7 @@ label {
 .star {
     color: gold;
 }
-stars {
+.stars {
     display: flex;
     flex-direction: row;
     margin-top: 3px;
@@ -65,11 +63,7 @@ textarea {
 input:focus-visible {
     outline-color: tomato;
 }
-.mapboxgl-popup-content {
-    
-    box-shadow: -5px 5px 8px #4141414a !important;
 
-}
 .button {
     border: none;
     padding: 5px 10px;
@@ -100,4 +94,12 @@ button.button {
     display: flex;
     justify-content: flex-end;
     margin: 2%;
+}
+
+.mapboxgl-popup-content {
+    box-shadow: -5px 5px 8px #4141414a !important;
+}
+
+.mapboxgl-ctrl-bottom-right {
+    display: none !important;
 }
